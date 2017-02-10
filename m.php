@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <link rel="stylesheet" href="style.css" type="text/css"/> 
+	   <title>admin page</title>     
+</head> 
+<body>
+<ul>
+     <li>HOME</li>
+    <li>FILM NAME
+	<ul class="a d">
+		<li class="e"><input method="post" action="m.php" type="text" id="fname" name="search">
+		<button type="submit" name="button" id="x">YUP</button>
+		</ul>
+	    </li>
+	
+	
+	<li>YEAR<ul class="a c">
+		<li>1990-1995</li>
+		<li>1995-2000</li>
+		<li>2000-2005</li>
+		<li>2005-2010</li>
+		<li>2010-2015</li>
+		<li>2015-2017</li>
+		<li>Before 1990</li>
+	    </ul>
+	    </li>
+	
+	<li>DIRECTOR</li>
+	<li>CATEGORY
+	<ul class="a">
+		<li>HORROR/MUSICAL</li>
+		<li>ADVENTURE/THILLER</li>
+		<li>ROMANTIC/COMEDY</li>
+		<li>SUPERHERO/SCI-FI</li>
+		<li>MYSTREY/COMPLEX</li>
+	    </ul>
+	    </li>
+	 </ul>
+
+      
+
+<?php
+$con=mysql_connect('localhost', 'root', '');
+$db=mysql_select_db('film_search');
+if(isset($_POST['button'])){ //trigger button click
+$search=$_POST['search'];
+$query=mysql_query("select * from film where name like '%{$search}%' ");
+if (mysql_num_rows($query) > 0) {
+while ($row = mysql_fetch_array($query)) {
+echo "<tr><td>".$row['name']."</td><td></td><td>".$row['name']."</td></tr>";
+}
+}else{
+echo "No employee Found<br><br>";
+}
+}else{ //while not in use of search returns all the values
+$query=mysql_query("select * from employees");
+while ($row = mysql_fetch_array($query)) {
+echo "<tr><td>".$row['first_name']."</td><td></td><td>".$row['last_name']."</td></tr>";
+}
+}
+
+mysql_close();
+?>
+
+  
+
+
+
+
+
+
+
+</body>
+</html>
